@@ -7,12 +7,28 @@ public class Globals : MonoBehaviour
     private string playerNameAssigned;
     private string saidNameAssigned;
     private List<string> namesEasy;
+    private int score;
+    private int actualLevel;
+    private int lifesLeft;
 
     public Globals()
     {
         this.playerNameAssigned = "";
         this.saidNameAssigned = "";
         this.namesEasy = new List<string>() { "Daniil", "Bryan", "Sara" };
+        this.score = 0;
+        this.actualLevel = 1;
+        this.lifesLeft = 3;
+    }
+
+    public Globals(int score, int actualLevel, int lifesLeft)
+    {
+        this.playerNameAssigned = "";
+        this.saidNameAssigned = "";
+        this.namesEasy = new List<string>() { "Daniil", "Bryan", "Sara" };
+        this.score = score;
+        this.actualLevel = actualLevel;
+        this.lifesLeft = lifesLeft;
     }
 
     public List<string> GetEasyNames()
@@ -38,5 +54,15 @@ public class Globals : MonoBehaviour
     public string GetSaidNameAssigned()
     {
         return this.saidNameAssigned;
+    }
+
+    public int GetScore()
+    {
+        return this.score;
+    }
+
+    public void SetScore(int score)
+    {
+        this.score = score;
     }
 }

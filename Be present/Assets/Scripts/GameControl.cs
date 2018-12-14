@@ -9,7 +9,10 @@ public class GameControl : MonoBehaviour
     //to edit
     public Text playerNameText;
     public Text saidNameText;
+    public Text scoreText;
+    public Text levelText;
     public float timeNameChange;
+    public int points = 100;
 
     //Private
     float timer;
@@ -23,7 +26,7 @@ public class GameControl : MonoBehaviour
 
     private void Awake()
     {
-        GUIControlObject = new GUIControl(playerNameText, saidNameText);
+        GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText);
         GlobalsObject = new Globals();
         ChangePlayerName();
     }
@@ -48,7 +51,7 @@ public class GameControl : MonoBehaviour
     {
         if (GlobalsObject.GetSaidNameAssigned().Equals(GlobalsObject.GetPlayerNameAssigned()))
         {
-            print("correcto");
+            AddScore(points);
         }
         else
         {
@@ -87,5 +90,13 @@ public class GameControl : MonoBehaviour
         randomNewName = GlobalsObject.GetEasyNames()[index];
         GlobalsObject.SetSaidNameAssigned(randomNewName);
         GUIControlObject.ShowNewSaidName(randomNewName);
+    }
+
+    private void AddScore(int score)
+    {
+        int newScore;
+        newScore = GlobalsObject.GetScore() + score;
+        GlobalsObject.SetScore(newScore);
+        GUIControlObject.ShowNewScore(newScore);
     }
 }
