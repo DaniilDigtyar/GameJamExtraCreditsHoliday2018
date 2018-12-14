@@ -6,9 +6,15 @@ using UnityEngine;
 
 public class GameControl : MonoBehaviour
 {
-    //
+    //to edit
     public Text playerNameText;
     public Text saidNameText;
+    public float timeNameChange;
+
+    //Private
+    float timer;
+    int lastIndexSaidName = -1;
+    int lastIndexPlayerName = -1;
 
     //Objects
     GUIControl GUIControlObject;
@@ -19,22 +25,67 @@ public class GameControl : MonoBehaviour
     {
         GUIControlObject = new GUIControl(playerNameText, saidNameText);
         GlobalsObject = new Globals();
+        ChangePlayerName();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ChangePlayerName();
+            ControlNameSaid();
         }
+
+        if (timer % 60 >= timeNameChange -1)
+        {
+            timer = 0;
+            SayNewName();
+        }
+
+        timer += Time.deltaTime;
+    }
+
+    private void ControlNameSaid()
+    {
+        if (GlobalsObject.GetSaidNameAssigned().Equals(GlobalsObject.GetPlayerNameAssigned()))
+        {
+            print("correcto");
+        }
+        else
+        {
+            print("incorrecto");
+        }
+        ChangePlayerName();
     }
 
     private void ChangePlayerName()
     {
-        string randomNewName = GlobalsObject.GetEasyNames()[Random.Range(0,GlobalsObject.GetEasyNames().Count)];
+        int index;
+        string randomNewName;
+        do
+        {
+            index = Random.Range(0, GlobalsObject.GetEasyNames().Count);
+        } while (index == lastIndexPlayerName);
 
+        lastIndexPlayerName = index;
+
+        randomNewName = GlobalsObject.GetEasyNames()[index];
         GlobalsObject.SetPlayerNameAssigned(randomNewName);
         GUIControlObject.ShowNewPlayerName(randomNewName);
+    }
+
+    private void SayNewName()
+    {
+        int index;
+        string randomNewName;
+        do
+        {
+            index = Random.Range(0, GlobalsObject.GetEasyNames().Count);
+        } while (index == lastIndexSaidName);
+
+        lastIndexSaidName = index;
+
+        randomNewName = GlobalsObject.GetEasyNames()[index];
+        GlobalsObject.SetSaidNameAssigned(randomNewName);
+        GUIControlObject.ShowNewSaidName(randomNewName);
     }
 }

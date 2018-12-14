@@ -550,7 +550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNameText: {fileID: 1713890365}
-  saidNameText: {fileID: 0}
+  saidNameText: {fileID: 1382550044}
+  timeNameChange: 1.5
 --- !u!4 &1835313959
 Transform:
   m_ObjectHideFlags: 0
