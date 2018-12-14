@@ -20,7 +20,7 @@ public class GUIControl: MonoBehaviour
 
     public void ShowNewPlayerName(string newName)
     {
-        playerNameText.text = newName;
+        playerNameText.text = string.Concat("Your name ",newName);
     }
 
     public void ShowNewSaidName(string newName)

@@ -7,6 +7,8 @@ public class Globals : MonoBehaviour
     private string playerNameAssigned;
     private string saidNameAssigned;
     private List<string> namesEasy;
+    private List<string> namesMedium;
+    private List<string> namesHard;
     private int score;
     private int actualLevel;
     private int lifesLeft;

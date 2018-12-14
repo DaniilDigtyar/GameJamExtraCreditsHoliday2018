@@ -7,23 +7,22 @@ using UnityEngine;
 public class GameControl : MonoBehaviour
 {
     //to edit
-    public Text playerNameText;
-    public Text saidNameText;
-    public Text scoreText;
-    public Text levelText;
-    public float timeNameChange;
-    public int points = 100;
+    [SerializeField] private Text playerNameText;
+    [SerializeField] private Text saidNameText;
+    [SerializeField] private Text scoreText;
+    [SerializeField] private Text levelText;
+    [SerializeField] private float timeNameChange;
+    [SerializeField] private int points = 100;
 
     //Private
-    float timer;
-    int lastIndexSaidName = -1;
-    int lastIndexPlayerName = -1;
+    private float timer;
+    private int lastIndexSaidName = -1;
+    private int lastIndexPlayerName = -1;
 
     //Objects
-    GUIControl GUIControlObject;
-    Globals GlobalsObject;
+    private GUIControl GUIControlObject;
+    private Globals GlobalsObject;
   
-
     private void Awake()
     {
         GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText);
