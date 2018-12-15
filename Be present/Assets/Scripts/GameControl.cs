@@ -14,7 +14,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private float timeNameChange;
     [SerializeField] private int points = 100;
     [SerializeField] private Image lifesImage;
-    [SerializeField] private Sprite[] lives;
+    [SerializeField] private Sprite[] lifesSprites;
 
     //Private
     private float timer;
@@ -29,7 +29,7 @@ public class GameControl : MonoBehaviour
 
     private void Awake()
     {
-        lifesImage.sprite = lives[3];
+        lifesImage.sprite = lifesSprites[3];
         GlobalsObject = new Globals();
         GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, lifesImage );
         
@@ -97,7 +97,7 @@ public class GameControl : MonoBehaviour
             {
                 lifes--;
                 GlobalsObject.SetLifesLeft(lifes);
-                GUIControlObject.ChangeLifes(lives[lifes]);
+                GUIControlObject.ChangeLifes(lifesSprites[lifes]);
 
             }
             else
