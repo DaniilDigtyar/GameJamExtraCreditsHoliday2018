@@ -11,8 +11,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Text saidNameText;
     [SerializeField] private Text scoreText;
     [SerializeField] private Text levelText;
-    [SerializeField] private float timeNameChange;
-    [SerializeField] private int points = 100;
+    [SerializeField] private float timeNameChangeBase = 2;
+    [SerializeField] private int basePoints = 100;
 
     //Private
     private float timer;
@@ -20,6 +20,8 @@ public class GameControl : MonoBehaviour
     private float multiplicationRate;
     private int lastIndexSaidName = -1;
     private int lastIndexPlayerName = -1;
+    private int addPoints = 100;
+    private float reactionTime = 2;
 
     //Objects
     private GUIControl GUIControlObject;
@@ -39,7 +41,7 @@ public class GameControl : MonoBehaviour
             ControlNameSaid();
         }
 
-        if (timer % 60 >= timeNameChange - 1)
+        if (timer % 60 >= reactionTime)
         {
             timer = 0;
             SayNewName();
@@ -50,6 +52,7 @@ public class GameControl : MonoBehaviour
 
     private void LoadLevel(int level)
     {
+        float addPointsF;
         switch (level)
         {
             case 1:
@@ -74,6 +77,11 @@ public class GameControl : MonoBehaviour
                 break;
         }
 
+        addPointsF = basePoints * multiplicationRate;
+        addPoints = (int)addPointsF;
+
+        reactionTime = (timeNameChangeBase - 1) * multiplicationRate;
+
         GlobalsObject.SetActualLevel(level);
         GUIControlObject.ShowNewLevel(level);
         ChangePlayerName(dificulty);
@@ -82,9 +90,12 @@ public class GameControl : MonoBehaviour
 
     private void ControlNameSaid()
     {
+
+        
         if (GlobalsObject.GetSaidNameAssigned().Equals(GlobalsObject.GetPlayerNameAssigned()))
         {
-            AddScore(points);
+
+            AddScore(addPoints);
         }
         else
         {
