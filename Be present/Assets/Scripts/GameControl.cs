@@ -16,18 +16,20 @@ public class GameControl : MonoBehaviour
 
     //Private
     private float timer;
+    private string dificulty;
+    private float multiplicationRate;
     private int lastIndexSaidName = -1;
     private int lastIndexPlayerName = -1;
 
     //Objects
     private GUIControl GUIControlObject;
     private Globals GlobalsObject;
-  
+
     private void Awake()
     {
         GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText);
         GlobalsObject = new Globals();
-        ChangePlayerName();
+        LoadLevel(1);
     }
 
     void Update()
@@ -37,7 +39,7 @@ public class GameControl : MonoBehaviour
             ControlNameSaid();
         }
 
-        if (timer % 60 >= timeNameChange -1)
+        if (timer % 60 >= timeNameChange - 1)
         {
             timer = 0;
             SayNewName();
@@ -45,6 +47,38 @@ public class GameControl : MonoBehaviour
 
         timer += Time.deltaTime;
     }
+
+    private void LoadLevel(int level)
+    {
+        switch (level)
+        {
+            case 1:
+                dificulty = "easy";
+                multiplicationRate = 1;
+                break;
+            case 2:
+                dificulty = "easy";
+                multiplicationRate = 1.1f;
+                break;
+            case 3:
+                dificulty = "medium";
+                multiplicationRate = 1.2f;
+                break;
+            case 4:
+                dificulty = "medium";
+                multiplicationRate = 1.3f;
+                break;
+            case 5:
+                dificulty = "hard";
+                multiplicationRate = 1.4f;
+                break;
+        }
+
+        GlobalsObject.SetActualLevel(level);
+        GUIControlObject.ShowNewLevel(level);
+        ChangePlayerName(dificulty);
+    }
+
 
     private void ControlNameSaid()
     {
@@ -56,21 +90,36 @@ public class GameControl : MonoBehaviour
         {
             print("incorrecto");
         }
-        ChangePlayerName();
+        ChangePlayerName(dificulty);
     }
 
-    private void ChangePlayerName()
+    private void ChangePlayerName(string dificulty)
     {
         int index;
         string randomNewName;
+        List<string> namesList = new List<string>();
+
+        switch(dificulty)
+        {
+            case "easy":
+                namesList = GlobalsObject.GetEasyNames();
+                break;
+            case "medium":
+                //namesList = GlobalsObject.GetMediumNames();
+                break;
+            case "hard":
+                //namesList = GlobalsObject.GetHardNames();
+                break;
+        }
+
         do
         {
-            index = Random.Range(0, GlobalsObject.GetEasyNames().Count);
+            index = Random.Range(0, namesList.Count);
         } while (index == lastIndexPlayerName);
 
         lastIndexPlayerName = index;
 
-        randomNewName = GlobalsObject.GetEasyNames()[index];
+        randomNewName = namesList[index];
         GlobalsObject.SetPlayerNameAssigned(randomNewName);
         GUIControlObject.ShowNewPlayerName(randomNewName);
     }
@@ -79,14 +128,29 @@ public class GameControl : MonoBehaviour
     {
         int index;
         string randomNewName;
+        List<string> namesList = new List<string>();
+
+        switch (dificulty)
+        {
+            case "easy":
+                namesList = GlobalsObject.GetEasyNames();
+                break;
+            case "medium":
+                //namesList = GlobalsObject.GetMediumNames();
+                break;
+            case "hard":
+                //namesList = GlobalsObject.GetHardNames();
+                break;
+        }
+
         do
         {
-            index = Random.Range(0, GlobalsObject.GetEasyNames().Count);
+            index = Random.Range(0, namesList.Count);
         } while (index == lastIndexSaidName);
 
         lastIndexSaidName = index;
 
-        randomNewName = GlobalsObject.GetEasyNames()[index];
+        randomNewName = namesList[index];
         GlobalsObject.SetSaidNameAssigned(randomNewName);
         GUIControlObject.ShowNewSaidName(randomNewName);
     }

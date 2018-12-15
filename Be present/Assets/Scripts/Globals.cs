@@ -67,4 +67,14 @@ public class Globals : MonoBehaviour
     {
         this.score = score;
     }
+
+    public int GetActualLevel()
+    {
+        return this.actualLevel;
+    }
+
+    public void SetActualLevel(int actualLevel)
+    {
+        this.actualLevel = actualLevel;
+    }
 }

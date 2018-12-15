@@ -30,6 +30,11 @@ public class GUIControl: MonoBehaviour
 
     public void ShowNewScore(int score)
     {
-        scoreText.text = string.Concat("Score: ", score);
+        scoreText.text = string.Concat("Score ", score);
+    }
+
+    public void ShowNewLevel(int level)
+    {
+        levelText.text = string.Concat("Level ", level);
     }
 }
