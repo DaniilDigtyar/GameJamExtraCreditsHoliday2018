@@ -22,6 +22,9 @@ public class GameControl : MonoBehaviour
     private float multiplicationRate;
     private int lastIndexSaidName = -1;
     private int lastIndexPlayerName = -1;
+    private float h;
+    private float w;
+    private Vector2 position;
 
     //Objects
     private GUIControl GUIControlObject;
@@ -32,6 +35,9 @@ public class GameControl : MonoBehaviour
         lifesImage.sprite = lifesSprites[3];
         GlobalsObject = new Globals();
         GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, lifesImage );
+        w = (float)((Screen.width-Screen.width * 0.4)/2);
+        h = (float)((Screen.height - Screen.height * 0.4) / 2);
+        Debug.Log("Screen Height : " + Screen.height +" h: " + h);
         
         LoadLevel(1);
     }
@@ -166,11 +172,15 @@ public class GameControl : MonoBehaviour
             index = Random.Range(0, namesList.Count);
         } while (index == lastIndexSaidName);
 
+        position = new  Vector2 (Random.Range(-w,w),Random.Range(-h,h));
+
+
+
         lastIndexSaidName = index;
 
         randomNewName = namesList[index];
         GlobalsObject.SetSaidNameAssigned(randomNewName);
-        GUIControlObject.ShowNewSaidName(randomNewName);
+        GUIControlObject.ShowNewSaidName(randomNewName,position);
     }
 
     private void AddScore(int score)

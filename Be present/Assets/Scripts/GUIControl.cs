@@ -11,6 +11,8 @@ public class GUIControl: MonoBehaviour
     private Text levelText;
     private Image lifesImage;
     
+    
+    
 
     public GUIControl(Text playerNameText, Text saidNameText, Text scoreText, Text levelText,Image lifesImage)
     {
@@ -19,6 +21,7 @@ public class GUIControl: MonoBehaviour
         this.scoreText = scoreText;
         this.levelText = levelText;
         this.lifesImage = lifesImage;
+        
     }
 
     public void ShowNewPlayerName(string newName)
@@ -26,9 +29,10 @@ public class GUIControl: MonoBehaviour
         playerNameText.text = string.Concat("Your name is ",newName);
     }
 
-    public void ShowNewSaidName(string newName)
+    public void ShowNewSaidName(string newName,Vector2 position)
     {
         saidNameText.text = newName;
+        saidNameText.rectTransform.anchoredPosition = position;
     }
 
     public void ShowNewScore(int score)
