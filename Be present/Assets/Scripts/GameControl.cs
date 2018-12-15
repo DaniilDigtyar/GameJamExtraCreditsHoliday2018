@@ -20,6 +20,7 @@ public class GameControl : MonoBehaviour
     private bool timerStartStoped;
     private float timerReaction;
     private bool timerReactionStoped;
+    private bool stopInput;
     private string dificulty;
     private float multiplicationRate;
     private int lastIndexSaidName = -1;
@@ -34,6 +35,7 @@ public class GameControl : MonoBehaviour
 
     private void Awake()
     {
+        stopInput = true;
         timerReactionStoped = true;
         timerStartStoped = true;
         GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, studentAnswerText);
@@ -51,13 +53,14 @@ public class GameControl : MonoBehaviour
             {
                 timerStartStoped = true;
                 timerReactionStoped = false;
+                stopInput = false;
                 SayNewName();
             }
         }
 
         if (!timerReactionStoped)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && !stopInput)
             {
                 ControlNameSaid();
             }
@@ -112,6 +115,7 @@ public class GameControl : MonoBehaviour
 
     private void ControlNameSaid()
     {
+        stopInput = true;
         float answerTime = reactionTime;
         if (GlobalsObject.GetSaidNameAssigned().Equals(GlobalsObject.GetPlayerNameAssigned()))
         {
@@ -120,6 +124,7 @@ public class GameControl : MonoBehaviour
 
             if (timerReaction % 60 >= answerTime + 2)
             {
+                stopInput = false;
                 timerReaction = 0;
                 GUIControlObject.DisableStudentAnswerText();
                 SayNewName();
@@ -130,15 +135,19 @@ public class GameControl : MonoBehaviour
             print("incorrecto");
         }
         ChangePlayerName(dificulty);
+        
     }
 
     private void ControlEndTime()
     {
+        stopInput = true;
+
         if (!GlobalsObject.GetSaidNameAssigned().Equals(GlobalsObject.GetPlayerNameAssigned()))
         {
             GUIControlObject.EnableStudentAnswerText();
             if (timerReaction % 60 >= reactionTime + 2)
             {
+                stopInput = false;
                 timerReaction = 0;
                 GUIControlObject.DisableStudentAnswerText();
                 SayNewName();
@@ -163,10 +172,10 @@ public class GameControl : MonoBehaviour
                 namesList = GlobalsObject.GetEasyNames();
                 break;
             case "medium":
-                //namesList = GlobalsObject.GetMediumNames();
+                namesList = GlobalsObject.GetMediumNames();
                 break;
             case "hard":
-                //namesList = GlobalsObject.GetHardNames();
+                namesList = GlobalsObject.GetHardNames();
                 break;
         }
 
@@ -194,10 +203,10 @@ public class GameControl : MonoBehaviour
                 namesList = GlobalsObject.GetEasyNames();
                 break;
             case "medium":
-                //namesList = GlobalsObject.GetMediumNames();
+                namesList = GlobalsObject.GetMediumNames();
                 break;
             case "hard":
-                //namesList = GlobalsObject.GetHardNames();
+                namesList = GlobalsObject.GetHardNames();
                 break;
         }
 
@@ -221,7 +230,6 @@ public class GameControl : MonoBehaviour
         GUIControlObject.ShowNewScore(newScore);
     }
 
-    //FALTA HACER EL RANDOM PARA ESCOJER FRASE DE ERROR
     private void SayMissNamePhrase()
     {
         int index;

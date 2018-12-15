@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Globals : MonoBehaviour
 {
-    string[] missNamePhrase =
+    string[] missNamePhrasesRaw =
     {
         "I said name"
+    };
+
+    string[] namesEasyRaw =
+    {
+        "Daniil", "Bryan", "Sara"
+    };
+
+    string[] namesMediumRaw =
+    {
+        "Eduard", "Ignasi", "Guillem"
+    };
+
+    string[] namesHardRaw =
+    {
+        "Harmandeep", "Belinda", "Bergljot"
     };
 
     private string playerNameAssigned;
@@ -23,26 +38,28 @@ public class Globals : MonoBehaviour
     {
         this.playerNameAssigned = "";
         this.saidNameAssigned = "";
-        this.namesEasy = new List<string>() { "Daniil", "Bryan", "Sara" };
-        this.missNamePhrases = new List<string>(missNamePhrase);
+        this.namesEasy = new List<string>(namesEasyRaw);
+        this.namesMedium = new List<string>(namesMediumRaw);
+        this.namesHard = new List<string>(namesHardRaw);
+        this.missNamePhrases = new List<string>(missNamePhrasesRaw);
         this.score = 0;
         this.actualLevel = 1;
         this.lifesLeft = 3;
     }
 
-    public Globals(int score, int actualLevel, int lifesLeft)
-    {
-        this.playerNameAssigned = "";
-        this.saidNameAssigned = "";
-        this.namesEasy = new List<string>() { "Daniil", "Bryan", "Sara" };
-        this.score = score;
-        this.actualLevel = actualLevel;
-        this.lifesLeft = lifesLeft;
-    }
-
     public List<string> GetEasyNames()
     {
         return this.namesEasy;
+    }
+
+    public List<string> GetMediumNames()
+    {
+        return this.namesMedium;
+    }
+
+    public List<string> GetHardNames()
+    {
+        return this.namesHard;
     }
 
     public void SetPlayerNameAssigned(string name)
