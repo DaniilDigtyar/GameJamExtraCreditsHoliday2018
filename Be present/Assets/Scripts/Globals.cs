@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Globals : MonoBehaviour
 {
+    string[] missNamePhrase =
+    {
+        "I said name"
+    };
+
     private string playerNameAssigned;
     private string saidNameAssigned;
     private List<string> namesEasy;
     private List<string> namesMedium;
     private List<string> namesHard;
+    private List<string> missNamePhrases;
     private int score;
     private int actualLevel;
     private int lifesLeft;
@@ -18,6 +24,7 @@ public class Globals : MonoBehaviour
         this.playerNameAssigned = "";
         this.saidNameAssigned = "";
         this.namesEasy = new List<string>() { "Daniil", "Bryan", "Sara" };
+        this.missNamePhrases = new List<string>(missNamePhrase);
         this.score = 0;
         this.actualLevel = 1;
         this.lifesLeft = 3;
@@ -76,5 +83,10 @@ public class Globals : MonoBehaviour
     public void SetActualLevel(int actualLevel)
     {
         this.actualLevel = actualLevel;
+    }
+
+    public List<string> GetMissNamePhrases()
+    {
+        return this.missNamePhrases;
     }
 }
