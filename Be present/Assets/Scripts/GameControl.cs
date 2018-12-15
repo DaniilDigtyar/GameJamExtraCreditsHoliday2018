@@ -13,6 +13,8 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Text levelText;
     [SerializeField] private float timeNameChange;
     [SerializeField] private int points = 100;
+    [SerializeField] private Image lifesImage;
+    [SerializeField] private Sprite[] lives;
 
     //Private
     private float timer;
@@ -27,8 +29,10 @@ public class GameControl : MonoBehaviour
 
     private void Awake()
     {
-        GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText);
+        lifesImage.sprite = lives[3];
         GlobalsObject = new Globals();
+        GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, lifesImage );
+        
         LoadLevel(1);
     }
 
@@ -88,7 +92,21 @@ public class GameControl : MonoBehaviour
         }
         else
         {
-            print("incorrecto");
+            int lifes = GlobalsObject.GetLifesLeft();
+            if (lifes>0)
+            {
+                lifes--;
+                GlobalsObject.SetLifesLeft(lifes);
+                GUIControlObject.ChangeLifes(lives[lifes]);
+
+            }
+            else
+            {
+                //GameOver:Canvi escena...
+            }
+            
+            
+           
         }
         ChangePlayerName(dificulty);
     }

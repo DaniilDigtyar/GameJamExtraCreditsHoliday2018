@@ -9,13 +9,16 @@ public class GUIControl: MonoBehaviour
     private Text saidNameText;
     private Text scoreText;
     private Text levelText;
+    private Image lifesImage;
+    
 
-    public GUIControl(Text playerNameText, Text saidNameText, Text scoreText, Text levelText)
+    public GUIControl(Text playerNameText, Text saidNameText, Text scoreText, Text levelText,Image lifesImage)
     {
         this.playerNameText = playerNameText;
         this.saidNameText = saidNameText;
         this.scoreText = scoreText;
         this.levelText = levelText;
+        this.lifesImage = lifesImage;
     }
 
     public void ShowNewPlayerName(string newName)
@@ -36,5 +39,9 @@ public class GUIControl: MonoBehaviour
     public void ShowNewLevel(int level)
     {
         levelText.text = string.Concat("Level ", level);
+    }
+    public void ChangeLifes(Sprite lives)
+    {
+        lifesImage.sprite = lives;
     }
 }
