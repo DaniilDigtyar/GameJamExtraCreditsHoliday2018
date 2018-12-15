@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -100,9 +100,9 @@ public class GameControl : MonoBehaviour
                 GUIControlObject.ChangeLifes(lifesSprites[lifes]);
 
             }
-            else
+            else if(lifes == 0)
             {
-                //GameOver:Canvi escena...
+                SceneManager.LoadScene("GameOver");
             }
             
             

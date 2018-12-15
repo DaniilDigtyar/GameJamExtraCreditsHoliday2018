@@ -627,11 +627,11 @@ RectTransform:
   m_Father: {fileID: 282906992}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 169, y: 126}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -5, y: -1}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &1382550044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,11 +706,11 @@ RectTransform:
   m_Father: {fileID: 282906992}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -162, y: 128}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 12, y: 1}
   m_SizeDelta: {x: 160, y: 30}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1713890365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,7 +791,7 @@ MonoBehaviour:
   timeNameChange: 1.5
   points: 100
   lifesImage: {fileID: 294857483}
-  lives:
+  lifesSprites:
   - {fileID: 21300006, guid: c21406f9e1455b3429d67adf9fa027d8, type: 3}
   - {fileID: 21300004, guid: c21406f9e1455b3429d67adf9fa027d8, type: 3}
   - {fileID: 21300002, guid: c21406f9e1455b3429d67adf9fa027d8, type: 3}
