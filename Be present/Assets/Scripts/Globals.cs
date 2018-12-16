@@ -62,6 +62,14 @@ public class Globals : MonoBehaviour
         return this.namesHard;
     }
 
+    public void SetLifesLeft (int lifes)
+    {
+        this.lifesLeft = lifes;
+    }
+    public int GetLifesLeft ()
+    {
+        return this.lifesLeft;
+    }
     public void SetPlayerNameAssigned(string name)
     {
         this.playerNameAssigned = name;
