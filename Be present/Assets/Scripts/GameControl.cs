@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
@@ -13,6 +13,9 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Text levelText;
     [SerializeField] private float timeNameChange;
     [SerializeField] private int points = 100;
+    [SerializeField] private Image lifesImage;
+    [SerializeField] private Image background;
+    [SerializeField] private Sprite[] lifesSprites;
 
     //Private
     private float timer;
@@ -20,6 +23,14 @@ public class GameControl : MonoBehaviour
     private float multiplicationRate;
     private int lastIndexSaidName = -1;
     private int lastIndexPlayerName = -1;
+    private float h;
+    private float w;
+    private float x;
+    private float y;
+    private int fontSizeProfundity;
+
+
+    private Vector2 position;
 
     //Objects
     private GUIControl GUIControlObject;
@@ -27,8 +38,17 @@ public class GameControl : MonoBehaviour
 
     private void Awake()
     {
-        GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText);
+        lifesImage.sprite = lifesSprites[3];
         GlobalsObject = new Globals();
+        
+        w = (float)(Screen.width);
+        h = (float)(Screen.height);
+        background.rectTransform.sizeDelta = new Vector2(w, h);
+        GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, lifesImage,background);
+
+        w = w / 5;
+
+
         LoadLevel(1);
     }
 
@@ -88,7 +108,21 @@ public class GameControl : MonoBehaviour
         }
         else
         {
-            print("incorrecto");
+            int lifes = GlobalsObject.GetLifesLeft();
+            if (lifes>0)
+            {
+                lifes--;
+                GlobalsObject.SetLifesLeft(lifes);
+                GUIControlObject.ChangeLifes(lifesSprites[lifes]);
+
+            }
+            else if(lifes == 0)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+            
+            
+           
         }
         ChangePlayerName(dificulty);
     }
@@ -147,12 +181,19 @@ public class GameControl : MonoBehaviour
         {
             index = Random.Range(0, namesList.Count);
         } while (index == lastIndexSaidName);
+        x = Random.Range(w,2*w);
+        y = Random.Range(h/5, h*4/5);
+        position = new Vector2 (x,y);
+        fontSizeProfundity = (int)(w/10 + (x-w) * 10/w );
+
+
+
 
         lastIndexSaidName = index;
 
         randomNewName = namesList[index];
         GlobalsObject.SetSaidNameAssigned(randomNewName);
-        GUIControlObject.ShowNewSaidName(randomNewName);
+        GUIControlObject.ShowNewSaidName(randomNewName,position,fontSizeProfundity);
     }
 
     private void AddScore(int score)
