@@ -15,6 +15,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private float timeNameChangeBase = 2;
     [SerializeField] private int basePoints = 100;
     [SerializeField] private int level = 1;
+    [SerializeField] private int correctAnswerNedded = 3;
 
     //Private
     private float timerStart;
@@ -29,7 +30,6 @@ public class GameControl : MonoBehaviour
     private int addPoints = 100;
     private float reactionTime = 2;
     private int correctAnswers;
-
 
     //Objects
     private GUIControl GUIControlObject;
