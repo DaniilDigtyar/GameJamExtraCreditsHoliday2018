@@ -945,7 +945,7 @@ MonoBehaviour:
   timeNameChangeBase: 2
   basePoints: 100
   level: 1
-  correctAnswerNedded: 3
+  correctAnswerNedded: 1
   lifesImage: {fileID: 65574367}
   background: {fileID: 1744194260}
   lifesSprites:

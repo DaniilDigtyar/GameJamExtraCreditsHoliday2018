@@ -15,7 +15,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private float timeNameChangeBase = 2;
     [SerializeField] private int basePoints = 100;
     [SerializeField] private int level = 1;
-    [SerializeField] private int correctAnswerNedded = 3;
+    [SerializeField] private int correctAnswerNedded = 1;
     [SerializeField] private Image lifesImage;
     [SerializeField] private Image background;
     [SerializeField] private Sprite[] lifesSprites;
@@ -26,6 +26,7 @@ public class GameControl : MonoBehaviour
     private float timerReaction;
     private bool timerReactionStoped;
     private bool stopInput;
+    private bool stopEndTime;
     private string dificulty;
     private float multiplicationRate;
     private int lastIndexSaidName = -1;
@@ -39,6 +40,7 @@ public class GameControl : MonoBehaviour
     private float y;
     private int fontSizeProfundity;
     private Vector2 position;
+    private float answerTime;
 
     //Objects
     private GUIControl GUIControlObject;
@@ -83,9 +85,28 @@ public class GameControl : MonoBehaviour
                 ControlNameSaid();
             }
 
-            if (timerReaction % 60 >= reactionTime)
+            if (timerReaction % 60 >= reactionTime && !stopEndTime)
             {
                 ControlEndTime();
+            }
+            else
+            {
+                if (timerReaction % 60 >= answerTime + 2)
+                {
+                    stopInput = false;
+                    timerReaction = 0;
+                    GUIControlObject.DisableStudentAnswerText();
+                    print("preload");
+                    if (correctAnswers >= correctAnswerNedded)
+                    {
+                        print("load");
+                        SceneManager.LoadScene(string.Concat("Change to Level", GlobalsObject.GetActualLevel() + 1));
+                    }
+                    else
+                    {
+                        SayNewName();
+                    }
+                }
             }
             timerReaction += Time.deltaTime;
         }
@@ -135,19 +156,14 @@ public class GameControl : MonoBehaviour
     private void ControlNameSaid()
     {
         stopInput = true;
-        float answerTime = reactionTime;
+        stopEndTime = true;
+        answerTime = reactionTime;
         if (GlobalsObject.GetSaidNameAssigned().Equals(GlobalsObject.GetPlayerNameAssigned()))
         {
+            correctAnswers++;
+            print(correctAnswers);
             AddScore(addPoints);
             GUIControlObject.EnableStudentAnswerText();
-
-            if (timerReaction % 60 >= answerTime + 2)
-            {
-                stopInput = false;
-                timerReaction = 0;
-                GUIControlObject.DisableStudentAnswerText();
-                SayNewName();
-            }
         }
         else
         {
@@ -232,7 +248,7 @@ public class GameControl : MonoBehaviour
         int index;
         string randomNewName;
         List<string> namesList = new List<string>();
-
+        stopEndTime = false;
         switch (dificulty)
         {
             case "easy":
