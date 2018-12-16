@@ -52,20 +52,22 @@ public class GameControl : MonoBehaviour
         lifesImage.sprite = lifesSprites[3];
         w = (float)(Screen.width);
         h = (float)(Screen.height);
-        print(Screen.width);
+        //print(Screen.width);
         background.rectTransform.sizeDelta = new Vector2(w, h);
         GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, studentAnswerText, lifesImage, background);
-        w = w / 5;
+        
 
         GlobalsObject = new Globals();
         LoadLevel(level);
+        //w = w / 5;
     }
 
     void Update()
     {
         if (!timerStartStoped)
         {
-            GUIControlObject.ShowNewSaidName("Okay we are going to start!");
+            position = new Vector2(w/2,h/2);
+            GUIControlObject.ShowNewSaidName("Okay we are going to start!",position,25);
             timerStart += Time.deltaTime;
             if (timerStart%60 >= 3)
             {
@@ -250,10 +252,12 @@ public class GameControl : MonoBehaviour
         {
             index = Random.Range(0, namesList.Count);
         } while (index == lastIndexSaidName);
-        x = Random.Range(w, 2 * w);
-        y = Random.Range(h / 5, h * 4 / 5);
+        
+        
+        x = Random.Range( w / 5 , 2 * w / 5);
+        y = Random.Range( h / 4, h * 3 / 4);
         position = new Vector2(x, y);
-        fontSizeProfundity = (int)(w / 10 + (x - w) * 10 / w);
+        fontSizeProfundity = (int)(w/6  + (x - w) * 10 / w);
 
         lastIndexSaidName = index;
 

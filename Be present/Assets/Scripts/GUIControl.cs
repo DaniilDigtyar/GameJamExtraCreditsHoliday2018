@@ -36,11 +36,6 @@ public class GUIControl: MonoBehaviour
         saidNameText.fontSize = size;
     }
 
-    public void ShowNewSaidName(string newName)
-    {
-        saidNameText.text = newName;
-    }
-
     public void ChangeLifes(Sprite lives)
     {
         lifesImage.sprite = lives;
