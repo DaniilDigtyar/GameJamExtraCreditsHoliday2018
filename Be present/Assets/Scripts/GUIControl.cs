@@ -9,25 +9,19 @@ public class GUIControl: MonoBehaviour
     private Text saidNameText;
     private Text scoreText;
     private Text levelText;
+    private Text studentAnswerText;
     private Image lifesImage;
     private Image background;
-    
-    
-    
 
-    public GUIControl(Text playerNameText, Text saidNameText, Text scoreText, Text levelText,Image lifesImage,Image background)
+    public GUIControl(Text playerNameText, Text saidNameText, Text scoreText, Text levelText, Text studentAnswerText, Image lifesImage, Image background)
     {
         this.playerNameText = playerNameText;
         this.saidNameText = saidNameText;
         this.scoreText = scoreText;
         this.levelText = levelText;
+        this.studentAnswerText = studentAnswerText;
         this.lifesImage = lifesImage;
-
-        this.background = background ;
-        
-
-
-
+        this.background = background;
     }
 
     public void ShowNewPlayerName(string newName)
@@ -35,11 +29,26 @@ public class GUIControl: MonoBehaviour
         playerNameText.text = string.Concat("Your name is ",newName);
     }
 
-    public void ShowNewSaidName(string newName,Vector2 position,int size)
+    public void ShowNewSaidName(string newName,Vector2 position, int size)
     {
         saidNameText.text = newName;
         saidNameText.rectTransform.anchoredPosition = position;
         saidNameText.fontSize = size;
+    }
+
+    public void ShowNewSaidName(string newName)
+    {
+        saidNameText.text = newName;
+    }
+
+    public void ChangeLifes(Sprite lives)
+    {
+        lifesImage.sprite = lives;
+    }
+
+    public void ShowMissNamePhrase(string phrase)
+    {
+        saidNameText.text = phrase;
     }
 
     public void ShowNewScore(int score)
@@ -51,8 +60,16 @@ public class GUIControl: MonoBehaviour
     {
         levelText.text = string.Concat("Level ", level);
     }
-    public void ChangeLifes(Sprite lives)
+
+    public void EnableStudentAnswerText()
     {
-        lifesImage.sprite = lives;
+        saidNameText.enabled = false;
+        studentAnswerText.enabled = true;
+    }
+
+    public void DisableStudentAnswerText()
+    {
+        saidNameText.enabled = true;
+        studentAnswerText.enabled = false;
     }
 }

@@ -62,14 +62,6 @@ public class Globals : MonoBehaviour
         return this.namesHard;
     }
 
-    public void SetLifesLeft (int lifes)
-    {
-        this.lifesLeft = lifes;
-    }
-    public int GetLifesLeft ()
-    {
-        return this.lifesLeft;
-    }
     public void SetPlayerNameAssigned(string name)
     {
         this.playerNameAssigned = name;
@@ -113,5 +105,14 @@ public class Globals : MonoBehaviour
     public List<string> GetMissNamePhrases()
     {
         return this.missNamePhrases;
+    }
+
+    public void SetLifesLeft(int lifes)
+    {
+        this.lifesLeft = lifes;
+    }
+    public int GetLifesLeft()
+    {
+        return this.lifesLeft;
     }
 }
