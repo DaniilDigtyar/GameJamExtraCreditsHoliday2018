@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonsHandler : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class ButtonsHandler : MonoBehaviour
     }
     private void Credits()
     {
-        Application.LoadLevel("Credits");
+        SceneManager.LoadScene("Credits");
     }
 
     public void ButtonMenu()
@@ -19,7 +20,7 @@ public class ButtonsHandler : MonoBehaviour
     }
     private void Menu()
     {
-        Application.LoadLevel("MenuPrincipal");
+        SceneManager.LoadScene("Menu");
     }
 
     public void ButtonPlay()
@@ -28,7 +29,43 @@ public class ButtonsHandler : MonoBehaviour
     }
     private void Play()
     {
-        Application.LoadLevel("Main");
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void ButtonPlayLevel2()
+    {
+        Invoke("PlayLevel2", 0.5f);
+    }
+    private void PlayLevel2()
+    {
+        SceneManager.LoadScene("Level2");
+    }
+
+    public void ButtonPlayLevel3()
+    {
+        Invoke("PlayLevel3", 0.5f);
+    }
+    private void PlayLevel3()
+    {
+        SceneManager.LoadScene("Level3");
+    }
+
+    public void ButtonPlayLevel4()
+    {
+        Invoke("PlayLevel4", 0.5f);
+    }
+    private void PlayLevel4()
+    {
+        SceneManager.LoadScene("Level4");
+    }
+
+    public void ButtonPlayLevel5()
+    {
+        Invoke("PlayLevel5", 0.5f);
+    }
+    private void PlayLevel5()
+    {
+        SceneManager.LoadScene("Level5");
     }
 
     public void ButtonInstructions()
@@ -37,7 +74,7 @@ public class ButtonsHandler : MonoBehaviour
     }
     private void Instructions()
     {
-        Application.LoadLevel("Instructions");
+        SceneManager.LoadScene("Instructions");
     }
 
     public void ButtonExit()

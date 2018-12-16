@@ -14,6 +14,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Text studentAnswerText;
     [SerializeField] private float timeNameChangeBase = 2;
     [SerializeField] private int basePoints = 100;
+    [SerializeField] private int level = 1;
 
     //Private
     private float timerStart;
@@ -27,6 +28,7 @@ public class GameControl : MonoBehaviour
     private int lastIndexPlayerName = -1;
     private int addPoints = 100;
     private float reactionTime = 2;
+    private int correctAnswers;
 
 
     //Objects
@@ -40,7 +42,7 @@ public class GameControl : MonoBehaviour
         timerStartStoped = true;
         GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, studentAnswerText);
         GlobalsObject = new Globals();
-        LoadLevel(1);
+        LoadLevel(level);
     }
 
     void Update()
@@ -76,6 +78,7 @@ public class GameControl : MonoBehaviour
 
     private void LoadLevel(int level)
     {
+        correctAnswers = 0;
         float addPointsF;
         switch (level)
         {
@@ -141,7 +144,7 @@ public class GameControl : MonoBehaviour
     private void ControlEndTime()
     {
         stopInput = true;
-
+        
         if (!GlobalsObject.GetSaidNameAssigned().Equals(GlobalsObject.GetPlayerNameAssigned()))
         {
             GUIControlObject.EnableStudentAnswerText();

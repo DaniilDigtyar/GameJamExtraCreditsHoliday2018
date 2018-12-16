@@ -794,6 +794,7 @@ MonoBehaviour:
   studentAnswerText: {fileID: 1456106141}
   timeNameChangeBase: 2
   basePoints: 100
+  level: 4
 --- !u!4 &1835313959
 Transform:
   m_ObjectHideFlags: 0
