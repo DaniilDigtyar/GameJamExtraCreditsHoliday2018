@@ -14,6 +14,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private float timeNameChange;
     [SerializeField] private int points = 100;
     [SerializeField] private Image lifesImage;
+    [SerializeField] private Image background;
     [SerializeField] private Sprite[] lifesSprites;
 
     //Private
@@ -24,6 +25,11 @@ public class GameControl : MonoBehaviour
     private int lastIndexPlayerName = -1;
     private float h;
     private float w;
+    private float x;
+    private float y;
+    private int fontSizeProfundity;
+
+
     private Vector2 position;
 
     //Objects
@@ -34,11 +40,15 @@ public class GameControl : MonoBehaviour
     {
         lifesImage.sprite = lifesSprites[3];
         GlobalsObject = new Globals();
-        GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, lifesImage );
-        w = (float)((Screen.width-Screen.width * 0.4)/2);
-        h = (float)((Screen.height - Screen.height * 0.4) / 2);
-        Debug.Log("Screen Height : " + Screen.height +" h: " + h);
         
+        w = (float)(Screen.width);
+        h = (float)(Screen.height);
+        background.rectTransform.sizeDelta = new Vector2(w, h);
+        GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, lifesImage,background);
+
+        w = w / 5;
+
+
         LoadLevel(1);
     }
 
@@ -171,8 +181,11 @@ public class GameControl : MonoBehaviour
         {
             index = Random.Range(0, namesList.Count);
         } while (index == lastIndexSaidName);
+        x = Random.Range(w,2*w);
+        y = Random.Range(h/5, h*4/5);
+        position = new Vector2 (x,y);
+        fontSizeProfundity = (int)(w/10 + (x-w) * 10/w );
 
-        position = new  Vector2 (Random.Range(-w,w),Random.Range(-h,h));
 
 
 
@@ -180,7 +193,7 @@ public class GameControl : MonoBehaviour
 
         randomNewName = namesList[index];
         GlobalsObject.SetSaidNameAssigned(randomNewName);
-        GUIControlObject.ShowNewSaidName(randomNewName,position);
+        GUIControlObject.ShowNewSaidName(randomNewName,position,fontSizeProfundity);
     }
 
     private void AddScore(int score)
