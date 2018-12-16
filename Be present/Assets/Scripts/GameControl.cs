@@ -52,14 +52,12 @@ public class GameControl : MonoBehaviour
         lifesImage.sprite = lifesSprites[3];
         w = (float)(Screen.width);
         h = (float)(Screen.height);
-        //print(Screen.width);
+        
         background.rectTransform.sizeDelta = new Vector2(w, h);
         GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, studentAnswerText, lifesImage, background);
         
-
         GlobalsObject = new Globals();
         LoadLevel(level);
-        //w = w / 5;
     }
 
     void Update()
@@ -280,6 +278,7 @@ public class GameControl : MonoBehaviour
         List<string> phraseList = new List<string>();
         phraseList = GlobalsObject.GetMissNamePhrases();
         index = Random.Range(0, phraseList.Count);
-        GUIControlObject.ShowMissNamePhrase(phraseList[index]);
+        
+        GUIControlObject.ShowMissNamePhrase(string.Concat(phraseList[index], GlobalsObject.GetPlayerNameAssigned()));
     }
 }

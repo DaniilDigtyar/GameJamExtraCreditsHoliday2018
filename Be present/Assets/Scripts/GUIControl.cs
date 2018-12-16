@@ -43,6 +43,9 @@ public class GUIControl: MonoBehaviour
 
     public void ShowMissNamePhrase(string phrase)
     {
+        saidNameText.fontSize = 50;
+        saidNameText.rectTransform.position = new Vector2(Screen.width/2,Screen.height/2);
+        saidNameText.rectTransform.sizeDelta = new Vector2(300,60);
         saidNameText.text = phrase;
     }
 

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Globals : MonoBehaviour
 {
+    
     string[] missNamePhrasesRaw =
     {
-        "I said name"
+        "I said ","Next time punishment, ", "I recomend you to respond next time, "
     };
 
     string[] namesEasyRaw =
