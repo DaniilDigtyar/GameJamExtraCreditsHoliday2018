@@ -7,7 +7,7 @@ public class Globals : MonoBehaviour
     
     string[] missNamePhrasesRaw =
     {
-        "I said ","Next time punishment, ", "I recomend you to respond next time, "
+        "I said ","Next time penalty, ", "I recomend you to answer next time, "
     };
 
     string[] namesEasy1Raw =
@@ -22,7 +22,7 @@ public class Globals : MonoBehaviour
 
     string[] namesEasy3Raw =
 {
-        "Laia", "Joel", "Lluis", "Nuria", "Oriol", "Pablo", "Pau", "Pere","Paulo","Quim"
+        "Laia", "Joel", "Lluis", "Nuria", "Oriol", "Pablo", "Pau", "Pere","Paulo","Quim","Nuria"
     };
 
     string[] namesMedium1Raw =

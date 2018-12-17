@@ -22,6 +22,10 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Image background;
     [SerializeField] private Sprite[] lifesSprites;
     [SerializeField] private GameObject tryAgainButton;
+    [SerializeField] private AudioSource blablabla;
+    [SerializeField] private AudioSource here;
+    [SerializeField] private AudioSource error;
+    [SerializeField] private AudioSource correct;
 
     //Private
     private float timerStart;
@@ -44,6 +48,7 @@ public class GameControl : MonoBehaviour
     private Vector2 position;
     private float answerTime;
     private List<string> namesList = new List<string>();
+    private bool played;
 
     //Objects
     private GUIControl GUIControlObject;
@@ -97,6 +102,7 @@ public class GameControl : MonoBehaviour
             {
                 if (timerReaction % 60 >= answerTime + 2)
                 {
+
                     stopInput = false;
                     timerReaction = 0;
                     GUIControlObject.DisableStudentAnswerText();
@@ -173,6 +179,7 @@ public class GameControl : MonoBehaviour
 
         ChangePlayerName(dificulty);
         position = new Vector2(w / 4, h / 2);
+        blablabla.Play();
         GUIControlObject.ShowNewSaidName("Okay we are going to start!", position, 25);
 
     }
@@ -187,6 +194,7 @@ public class GameControl : MonoBehaviour
         {
             correctAnswers++;
             AddScore(addPoints);
+            correct.Play();
             GUIControlObject.EnableStudentAnswerText();
             if (correctAnswers >= correctAnswerNedded)
             {
@@ -205,6 +213,7 @@ public class GameControl : MonoBehaviour
 
     private void ControlLifes()
     {
+        error.Play();
         int lifes = Globals.lifesLeft;
         if (lifes > 1)
         {
@@ -224,19 +233,31 @@ public class GameControl : MonoBehaviour
 
     private void GameOver()
     {
+
         SceneManager.LoadScene("GameOver");
     }
 
     private void ControlEndTime()
     {
         stopInput = true;
-        
         if (!GlobalsObject.GetSaidNameAssigned().Equals(GlobalsObject.GetPlayerNameAssigned()))
         {
+            if (!here.isPlaying && !played)
+            {
+                played = true;
+                here.Play();
+            }
+
+
+             
+
             GUIControlObject.EnableStudentAnswerText();
+
             if (timerReaction % 60 >= reactionTime + 2)
             {
                 stopInput = false;
+                played = false;
+
                 timerReaction = 0;
                 GUIControlObject.DisableStudentAnswerText();
                 SayNewName();
@@ -267,7 +288,7 @@ public class GameControl : MonoBehaviour
         int index;
         string randomNewName;
         stopEndTime = false;
-
+        blablabla.Play();
         index = Random.Range(0, namesList.Count-1);
         
         
@@ -323,7 +344,6 @@ public class GameControl : MonoBehaviour
         List<string> phraseList = new List<string>();
         phraseList = GlobalsObject.GetMissNamePhrases();
         index = Random.Range(0, phraseList.Count);
-        
         GUIControlObject.ShowMissNamePhrase(string.Concat(phraseList[index], GlobalsObject.GetPlayerNameAssigned()));
     }
 
