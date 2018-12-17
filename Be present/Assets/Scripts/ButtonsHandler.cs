@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ButtonsHandler : MonoBehaviour
 {
+    [SerializeField] private GameObject gameControlScript;
+
     public void ButtonCredits()
     {
         Invoke("Credits", 0.5f);
@@ -85,4 +87,14 @@ public class ButtonsHandler : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void ButtonTryAgain()
+    {
+        Invoke("TryAgain", 0.5f);
+    }
+    private void TryAgain()
+    {
+        gameControlScript.BroadcastMessage("TryAgain");
+    }
+
 }

@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameControl : MonoBehaviour
 {
     //to edit
+
+
     [SerializeField] private Text playerNameText;
     [SerializeField] private Text saidNameText;
     [SerializeField] private Text scoreText;
@@ -19,6 +21,7 @@ public class GameControl : MonoBehaviour
     [SerializeField] private Image lifesImage;
     [SerializeField] private Image background;
     [SerializeField] private Sprite[] lifesSprites;
+    [SerializeField] private GameObject tryAgainButton;
 
     //Private
     private float timerStart;
@@ -48,9 +51,7 @@ public class GameControl : MonoBehaviour
 
     private void Awake()
     {
-        stopInput = true;
-        timerReactionStoped = true;
-        timerStartStoped = true;
+
         lifesImage.sprite = lifesSprites[3];
         w = (float)(Screen.width);
         h = (float)(Screen.height);
@@ -66,8 +67,8 @@ public class GameControl : MonoBehaviour
     {
         if (!timerStartStoped)
         {
-            position = new Vector2(w/2,h/2);
-            GUIControlObject.ShowNewSaidName("Okay we are going to start!",position,25);
+
+
             timerStart += Time.deltaTime;
             if (timerStart%60 >= 3)
             {
@@ -115,6 +116,12 @@ public class GameControl : MonoBehaviour
 
     private void LoadLevel(int level)
     {
+
+        stopInput = true;
+        timerReactionStoped = true;
+        timerStartStoped = false;
+        timerStart = 0;
+        timerReaction = 0;
         correctAnswers = 0;
         float addPointsF;
         switch (level)
@@ -149,7 +156,9 @@ public class GameControl : MonoBehaviour
         GlobalsObject.SetActualLevel(level);
         GUIControlObject.ShowNewLevel(level);
         ChangePlayerName(dificulty);
-        timerStartStoped = false;
+        position = new Vector2(w / 2, h / 2);
+        GUIControlObject.ShowNewSaidName("Okay we are going to start!", position, 25);
+
     }
 
 
@@ -168,6 +177,8 @@ public class GameControl : MonoBehaviour
         else
         {
             ControlLifes();
+            timerReactionStoped = true;
+            SayMissNamePhrase();
         }
         ChangePlayerName(dificulty);
         
@@ -206,9 +217,9 @@ public class GameControl : MonoBehaviour
         }
         else
         {
+            ControlLifes();
             timerReactionStoped = true;
             SayMissNamePhrase();
-            ControlLifes();
         }
     }
 
@@ -290,11 +301,18 @@ public class GameControl : MonoBehaviour
 
     private void SayMissNamePhrase()
     {
+        tryAgainButton.SetActive(true);
         int index;
         List<string> phraseList = new List<string>();
         phraseList = GlobalsObject.GetMissNamePhrases();
         index = Random.Range(0, phraseList.Count);
         
         GUIControlObject.ShowMissNamePhrase(string.Concat(phraseList[index], GlobalsObject.GetPlayerNameAssigned()));
+    }
+
+    private void TryAgain()
+    {
+        tryAgainButton.SetActive(false);
+        LoadLevel(GlobalsObject.GetActualLevel());
     }
 }
