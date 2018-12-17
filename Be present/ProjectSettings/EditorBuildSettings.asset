@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 27ee15a75dd58e24e88b0e0f6ccea377
   - enabled: 1
-    path: Assets/Scenes/Change to Level6.unity
-    guid: 643a388b0e74e3047b5d9b3c3074f73e
-  - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 7ca989f3b860bff4d9bfcbdf390acf93
   - enabled: 1
@@ -43,11 +40,14 @@ EditorBuildSettings:
     guid: a7be57448783e044ab45cae973065a6e
   - enabled: 1
     path: Assets/Scenes/Change to Level3.unity
-    guid: 3c41025828db039449265fddbf4855d3
+    guid: 0fadeef397b9ab04e896e4bf8e103a17
   - enabled: 1
     path: Assets/Scenes/Change to Level4.unity
-    guid: 3a5e6c9374d57884b93bdeb747933a97
+    guid: bb00c00406c0495428076a4bf22ac1da
   - enabled: 1
     path: Assets/Scenes/Change to Level5.unity
-    guid: 494f6a17998e0b14fb669f177a7a63c8
+    guid: ed0c8cb685f18154c9f942bfd4edd168
+  - enabled: 1
+    path: Assets/Scenes/Change to Level6.unity
+    guid: 643a388b0e74e3047b5d9b3c3074f73e
   m_configObjects: {}
