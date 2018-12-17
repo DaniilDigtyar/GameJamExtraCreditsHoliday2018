@@ -12,12 +12,39 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 27ee15a75dd58e24e88b0e0f6ccea377
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
-    guid: 2e00f322dd7b1af44a0a2632612be06f
+    path: Assets/Scenes/FinalScore.unity
+    guid: 643a388b0e74e3047b5d9b3c3074f73e
   - enabled: 1
     path: Assets/Scenes/Credits.unity
     guid: 7ca989f3b860bff4d9bfcbdf390acf93
   - enabled: 1
     path: Assets/Scenes/Instructions.unity
     guid: 0df4a684bda56724a8b718d9b1188300
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: 2e00f322dd7b1af44a0a2632612be06f
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 6cdbe78a04e2bb94ca1235e789b32380
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 8219302f40386fc4ab010c1c82cf8b9d
+  - enabled: 1
+    path: Assets/Scenes/Level4.unity
+    guid: 8e7aeb98a53286340927b1f7cab80b58
+  - enabled: 1
+    path: Assets/Scenes/Level5.unity
+    guid: fa515f3e423330147bb648c2eaae93ec
+  - enabled: 1
+    path: Assets/Scenes/Change to Level2.unity
+    guid: a7be57448783e044ab45cae973065a6e
+  - enabled: 1
+    path: Assets/Scenes/Change to Level3.unity
+    guid: 3c41025828db039449265fddbf4855d3
+  - enabled: 1
+    path: Assets/Scenes/Change to Level4.unity
+    guid: 3a5e6c9374d57884b93bdeb747933a97
+  - enabled: 1
+    path: Assets/Scenes/Change to Level5.unity
+    guid: 494f6a17998e0b14fb669f177a7a63c8
   m_configObjects: {}
