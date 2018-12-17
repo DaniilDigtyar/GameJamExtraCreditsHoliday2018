@@ -32,8 +32,7 @@ public class GameControl : MonoBehaviour
     private bool stopEndTime;
     private string dificulty;
     private float multiplicationRate;
-    private int lastIndexSaidName = -1;
-    private int lastIndexPlayerName = -1;
+
     private int addPoints = 100;
     private float reactionTime = 2;
     private int correctAnswers;
@@ -44,6 +43,7 @@ public class GameControl : MonoBehaviour
     private int fontSizeProfundity;
     private Vector2 position;
     private float answerTime;
+    private List<string> namesList = new List<string>();
 
     //Objects
     private GUIControl GUIControlObject;
@@ -60,6 +60,9 @@ public class GameControl : MonoBehaviour
         GUIControlObject = new GUIControl(playerNameText, saidNameText, scoreText, levelText, studentAnswerText, lifesImage, background);
         
         GlobalsObject = new Globals();
+
+
+
         LoadLevel(level);
     }
 
@@ -97,16 +100,9 @@ public class GameControl : MonoBehaviour
                     stopInput = false;
                     timerReaction = 0;
                     GUIControlObject.DisableStudentAnswerText();
-                    print("preload");
-                    if (correctAnswers >= correctAnswerNedded)
-                    {
-                        print("load");
-                        SceneManager.LoadScene(string.Concat("Change to Level", GlobalsObject.GetActualLevel() + 1));
-                    }
-                    else
-                    {
+
                         SayNewName();
-                    }
+
                 }
             }
             timerReaction += Time.deltaTime;
@@ -123,6 +119,8 @@ public class GameControl : MonoBehaviour
         timerStart = 0;
         timerReaction = 0;
         correctAnswers = 0;
+
+
         float addPointsF;
         switch (level)
         {
@@ -148,15 +146,33 @@ public class GameControl : MonoBehaviour
                 break;
         }
 
+
         addPointsF = basePoints * multiplicationRate;
         addPoints = (int)addPointsF;
 
         reactionTime = (timeNameChangeBase - 1) * multiplicationRate;
 
-        GlobalsObject.SetActualLevel(level);
+        switch (dificulty)
+        {
+            case "easy":
+                namesList = GlobalsObject.ResetEasyNames();
+                break;
+            case "medium":
+                namesList = GlobalsObject.ResetMediumNames();
+                break;
+            case "hard":
+                namesList = GlobalsObject.ResetHardNames();
+                break;
+        }
+
+        Globals.actualLevel = level;
         GUIControlObject.ShowNewLevel(level);
+        GUIControlObject.ShowNewScore(Globals.score);
+        GUIControlObject.ChangeLifes(lifesSprites[Globals.lifesLeft]);
+
+
         ChangePlayerName(dificulty);
-        position = new Vector2(w / 2, h / 2);
+        position = new Vector2(w / 4, h / 2);
         GUIControlObject.ShowNewSaidName("Okay we are going to start!", position, 25);
 
     }
@@ -170,9 +186,13 @@ public class GameControl : MonoBehaviour
         if (GlobalsObject.GetSaidNameAssigned().Equals(GlobalsObject.GetPlayerNameAssigned()))
         {
             correctAnswers++;
-            print(correctAnswers);
             AddScore(addPoints);
             GUIControlObject.EnableStudentAnswerText();
+            if (correctAnswers >= correctAnswerNedded)
+            {
+                SceneManager.LoadScene(string.Concat("Change to Level", Globals.actualLevel + 1));
+            }
+            ChangePlayerName(dificulty);
         }
         else
         {
@@ -180,24 +200,31 @@ public class GameControl : MonoBehaviour
             timerReactionStoped = true;
             SayMissNamePhrase();
         }
-        ChangePlayerName(dificulty);
         
     }
 
     private void ControlLifes()
     {
-        int lifes = GlobalsObject.GetLifesLeft();
-        if (lifes > 0)
+        int lifes = Globals.lifesLeft;
+        if (lifes > 1)
         {
             lifes--;
-            GlobalsObject.SetLifesLeft(lifes);
+            Globals.lifesLeft = lifes;
             GUIControlObject.ChangeLifes(lifesSprites[lifes]);
 
         }
-        else if (lifes == 0)
+        else if (lifes == 1)
         {
-            SceneManager.LoadScene("GameOver");
+            lifes--;
+            Globals.lifesLeft = lifes;
+            GUIControlObject.ChangeLifes(lifesSprites[lifes]);
+            Invoke("GameOver", 2f);
         }
+    }
+
+    private void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 
     private void ControlEndTime()
@@ -227,29 +254,10 @@ public class GameControl : MonoBehaviour
     {
         int index;
         string randomNewName;
-        List<string> namesList = new List<string>();
-
-        switch(dificulty)
-        {
-            case "easy":
-                namesList = GlobalsObject.GetEasyNames();
-                break;
-            case "medium":
-                namesList = GlobalsObject.GetMediumNames();
-                break;
-            case "hard":
-                namesList = GlobalsObject.GetHardNames();
-                break;
-        }
-
-        do
-        {
-            index = Random.Range(0, namesList.Count);
-        } while (index == lastIndexPlayerName);
-
-        lastIndexPlayerName = index;
+        index = Random.Range(0, namesList.Count-1);
 
         randomNewName = namesList[index];
+
         GlobalsObject.SetPlayerNameAssigned(randomNewName);
         GUIControlObject.ShowNewPlayerName(randomNewName);
     }
@@ -258,25 +266,9 @@ public class GameControl : MonoBehaviour
     {
         int index;
         string randomNewName;
-        List<string> namesList = new List<string>();
         stopEndTime = false;
-        switch (dificulty)
-        {
-            case "easy":
-                namesList = GlobalsObject.GetEasyNames();
-                break;
-            case "medium":
-                namesList = GlobalsObject.GetMediumNames();
-                break;
-            case "hard":
-                namesList = GlobalsObject.GetHardNames();
-                break;
-        }
 
-        do
-        {
-            index = Random.Range(0, namesList.Count);
-        } while (index == lastIndexSaidName);
+        index = Random.Range(0, namesList.Count-1);
         
         
         x = Random.Range( w / 5 , 2 * w / 5);
@@ -284,24 +276,49 @@ public class GameControl : MonoBehaviour
         position = new Vector2(x, y);
         fontSizeProfundity = (int)(w/6  + (x - w) * 10 / w);
 
-        lastIndexSaidName = index;
-
         randomNewName = namesList[index];
         GlobalsObject.SetSaidNameAssigned(randomNewName);
         GUIControlObject.ShowNewSaidName(randomNewName, position, fontSizeProfundity);
+        DeleteName(index);
     }
+
+    private void DeleteName(int index)
+    {
+        print(namesList[index]);
+        namesList.RemoveAt(index);
+        if (namesList.Count <= 0)
+        {
+            print("reset");
+            switch (dificulty)
+            {
+                case "easy":
+                    namesList = GlobalsObject.ResetEasyNames();
+                    break;
+                case "medium":
+                    namesList = GlobalsObject.ResetMediumNames();
+                    break;
+                case "hard":
+                    namesList = GlobalsObject.ResetHardNames();
+                    break;
+            }
+        }
+    }
+
 
     private void AddScore(int score)
     {
         int newScore;
-        newScore = GlobalsObject.GetScore() + score;
-        GlobalsObject.SetScore(newScore);
+        newScore = Globals.score + score;
+        Globals.score = newScore;
         GUIControlObject.ShowNewScore(newScore);
     }
 
     private void SayMissNamePhrase()
     {
-        tryAgainButton.SetActive(true);
+        if (Globals.lifesLeft > 0)
+        {
+            tryAgainButton.SetActive(true);
+        }
         int index;
         List<string> phraseList = new List<string>();
         phraseList = GlobalsObject.GetMissNamePhrases();
@@ -313,6 +330,6 @@ public class GameControl : MonoBehaviour
     private void TryAgain()
     {
         tryAgainButton.SetActive(false);
-        LoadLevel(GlobalsObject.GetActualLevel());
+        LoadLevel(Globals.actualLevel);
     }
 }

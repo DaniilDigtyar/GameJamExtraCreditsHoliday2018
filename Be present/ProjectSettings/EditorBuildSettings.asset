@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: 27ee15a75dd58e24e88b0e0f6ccea377
   - enabled: 1
-    path: Assets/Scenes/FinalScore.unity
+    path: Assets/Scenes/Change to Level6.unity
     guid: 643a388b0e74e3047b5d9b3c3074f73e
   - enabled: 1
     path: Assets/Scenes/Credits.unity
@@ -21,20 +21,23 @@ EditorBuildSettings:
     path: Assets/Scenes/Instructions.unity
     guid: 0df4a684bda56724a8b718d9b1188300
   - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 0cd0ce3377bb2164da6e9e030f0d9d7d
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 2e00f322dd7b1af44a0a2632612be06f
   - enabled: 1
     path: Assets/Scenes/Level2.unity
-    guid: 6cdbe78a04e2bb94ca1235e789b32380
+    guid: 9fe6833e573218f41b0f25112ee0d2a7
   - enabled: 1
     path: Assets/Scenes/Level3.unity
-    guid: 8219302f40386fc4ab010c1c82cf8b9d
+    guid: befec6b00ffba304d85ad4cfcef63910
   - enabled: 1
     path: Assets/Scenes/Level4.unity
-    guid: 8e7aeb98a53286340927b1f7cab80b58
+    guid: c49f023202195d141a897b72809f87ea
   - enabled: 1
     path: Assets/Scenes/Level5.unity
-    guid: fa515f3e423330147bb648c2eaae93ec
+    guid: 0d2ea36c785b7574db9f53ec909c5954
   - enabled: 1
     path: Assets/Scenes/Change to Level2.unity
     guid: a7be57448783e044ab45cae973065a6e

@@ -10,58 +10,111 @@ public class Globals : MonoBehaviour
         "I said ","Next time punishment, ", "I recomend you to respond next time, "
     };
 
-    string[] namesEasyRaw =
+    string[] namesEasy1Raw =
     {
-        "Daniil", "Bryan", "Sara"
+        "Daniil", "Bryan", "Sara", "Elena", "Adria", "Albert", "Clara", "Marc","David","Xavier"
     };
 
-    string[] namesMediumRaw =
-    {
-        "Eduard", "Ignasi", "Guillem"
+    string[] namesEasy2Raw =
+{
+        "Alex", "Andy", "Angel", "Bernat", "Didac", "Diego", "Edgar", "Eric","Ivan","Joan"
     };
 
-    string[] namesHardRaw =
+    string[] namesEasy3Raw =
+{
+        "Laia", "Joel", "Lluis", "Nuria", "Oriol", "Pablo", "Pau", "Pere","Paulo","Quim"
+    };
+
+    string[] namesMedium1Raw =
     {
-        "Harmandeep", "Belinda", "Bergljot"
+        "Eduard", "Ignasi", "Guillem", "William", "Samantha", "Thomas", "Roberts","Miquel","Miguel","Xavier"
+    };
+
+    string[] namesMedium2Raw =
+{
+        "Rubem", "Talia", "Toni", "Luciana", "Thodora", "Rafaella", "Victoria","Gerard","Daniel","Charles"
+    };
+
+    string[] namesHard1Raw =
+    {
+        "Harmandeep", "Belinda", "Bergljot", "Elizabeth", "Wilson", "Williams", "Alexander", "Anderson", "Augustus", "Esmeralda", "Isabella"
     };
 
     private string playerNameAssigned;
     private string saidNameAssigned;
-    private List<string> namesEasy;
-    private List<string> namesMedium;
-    private List<string> namesHard;
+    private List<string> namesEasy1;
+    private List<string> namesEasy2;
+    private List<string> namesEasy3;
+    private List<string> namesMedium1;
+    private List<string> namesMedium2;
+    private List<string> namesHard1;
     private List<string> missNamePhrases;
-    private int score;
-    private int actualLevel;
-    private int lifesLeft;
+    public static int score = 0;
+    public static int actualLevel = 1;
+    public static int lifesLeft = 3;
 
     public Globals()
     {
         this.playerNameAssigned = "";
         this.saidNameAssigned = "";
-        this.namesEasy = new List<string>(namesEasyRaw);
-        this.namesMedium = new List<string>(namesMediumRaw);
-        this.namesHard = new List<string>(namesHardRaw);
+        this.namesEasy1 = new List<string>(namesEasy1Raw);
+        this.namesEasy2 = new List<string>(namesEasy2Raw);
+        this.namesEasy3 = new List<string>(namesEasy3Raw);
+        this.namesMedium1 = new List<string>(namesMedium1Raw);
+        this.namesMedium2 = new List<string>(namesMedium2Raw);
+        this.namesHard1 = new List<string>(namesHard1Raw);
         this.missNamePhrases = new List<string>(missNamePhrasesRaw);
-        this.score = 0;
-        this.actualLevel = 1;
-        this.lifesLeft = 3;
     }
 
-    public List<string> GetEasyNames()
+    public List<string> ResetEasyNames()
     {
-        return this.namesEasy;
+        int i=Random.Range(0, 3);
+        switch (i)
+        {
+            case 1:
+                return new List<string>(namesEasy1Raw);
+
+                break;
+            case 2:
+                return new List<string>(namesEasy2Raw);
+
+                break;
+            case 3:
+                return new List<string>(namesEasy3Raw);
+
+                break;
+        }
+        return new List<string>(namesEasy1Raw);
+
     }
 
-    public List<string> GetMediumNames()
+
+    public List<string> ResetMediumNames()
     {
-        return this.namesMedium;
+        int i = Random.Range(0, 2);
+        switch (i)
+        {
+            case 1:
+                return new List<string>(namesMedium1Raw);
+
+                break;
+            case 2:
+                return new List<string>(namesMedium2Raw);
+
+                break;
+
+        }
+
+        return new List<string>(namesMedium1Raw);
     }
 
-    public List<string> GetHardNames()
+
+    public List<string> ResetHardNames()
     {
-        return this.namesHard;
+        return new List<string>(namesHard1Raw);
     }
+
+
 
     public void SetPlayerNameAssigned(string name)
     {
@@ -83,37 +136,9 @@ public class Globals : MonoBehaviour
         return this.saidNameAssigned;
     }
 
-    public int GetScore()
-    {
-        return this.score;
-    }
-
-    public void SetScore(int score)
-    {
-        this.score = score;
-    }
-
-    public int GetActualLevel()
-    {
-        return this.actualLevel;
-    }
-
-    public void SetActualLevel(int actualLevel)
-    {
-        this.actualLevel = actualLevel;
-    }
-
     public List<string> GetMissNamePhrases()
     {
         return this.missNamePhrases;
     }
 
-    public void SetLifesLeft(int lifes)
-    {
-        this.lifesLeft = lifes;
-    }
-    public int GetLifesLeft()
-    {
-        return this.lifesLeft;
-    }
 }
